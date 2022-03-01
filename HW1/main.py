@@ -304,7 +304,7 @@ def encounter(encountered_obj, encountered_obj_row, encountered_obj_col):
 
     # player lost
     if player.pokemon.hp <= 0:
-        rprint("Your pokemon is out of hp. Thank you for playing the early rendition of NOMEKOP")
+        rprint("Your pokemon is out of hp. Thank you for playing the early rendition of NOMEKOP.")
         print("----------------------------------------------------------")
         sys.exit()
     # player won
@@ -329,7 +329,7 @@ def game_loop():
     # Move around the board
     while True:
         # Take an input of up down left right
-        move = input("Input a direction to move one space in: up, down, left, right (u,d,l,r also accepted)\n")
+        move = input("Input a direction to move one space in: up, down, left, right (u,d,l,r also accepted) or exit to end the game\n")
         # Check move is legal and perform if it is, but keep asking for new one if it is not
         while True:
             if (move == "u" or move == "up") and player.row-1 in range(0, 7):
@@ -342,7 +342,7 @@ def game_loop():
                     field.grid[player.row][player.col], field.grid[player.row-1][player.col] = field.grid[player.row-1][player.col], field.grid[player.row][player.col]
                     player.row -= 1
                 break
-            if (move == "d" or move == "down") and player.row+1 in range(1, 8):
+            elif (move == "d" or move == "down") and player.row+1 in range(1, 8):
                 if not isinstance(field.grid[player.row + 1][player.col].stored_obj, str):
                     engage = input("There is something or someone on the space you are heading for. y or n to interact\n")
                     if engage == 'y':
@@ -352,7 +352,7 @@ def game_loop():
                     field.grid[player.row][player.col], field.grid[player.row+1][player.col] = field.grid[player.row+1][player.col], field.grid[player.row][player.col]
                     player.row += 1
                 break
-            if (move == "l" or move == "left") and player.col-1 in range(0, 7):
+            elif (move == "l" or move == "left") and player.col-1 in range(0, 7):
                 if not isinstance(field.grid[player.row][player.col-1].stored_obj, str):
                     engage = input(
                         "There is something or someone on the space you are heading for. y or n to interact\n")
@@ -362,7 +362,7 @@ def game_loop():
                     field.grid[player.row][player.col], field.grid[player.row][player.col-1] = field.grid[player.row][player.col-1], field.grid[player.row][player.col]
                     player.col -= 1
                 break
-            if (move == "r" or move == "right") and player.col+1 in range(1, 8):
+            elif (move == "r" or move == "right") and player.col+1 in range(1, 8):
                 if not isinstance(field.grid[player.row][player.col+1].stored_obj, str):
                     engage = input(
                         "There is something or someone on the space you are heading for. y or n to interact\n")
@@ -372,6 +372,10 @@ def game_loop():
                     field.grid[player.row][player.col], field.grid[player.row][player.col+1] = field.grid[player.row][player.col+1], field.grid[player.row][player.col]
                     player.col += 1
                 break
+
+            elif (move == "exit"):
+                rprint("Thank you for playing the early rendition of NOMEKOP")
+                sys.exit()
 
             move = input("You inputted an illegal move, try again: up, down, left, right (u,d,l,r also accepted)\n")
 
